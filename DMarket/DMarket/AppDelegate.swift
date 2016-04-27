@@ -16,6 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let numberOfTableViewRows: NSInteger = 20
+        let numberOfCollectionViewCells: NSInteger = 30
+        
+        var source = Array<AnyObject>()
+        for _ in 0..<numberOfTableViewRows {
+            var colorArray = Array<UIColor>()
+            for _ in 0..<numberOfCollectionViewCells {
+                let color = UIColor(red: CGFloat(drand48()), green: CGFloat(drand48()), blue: CGFloat(drand48()), alpha: 1)
+                colorArray.append(color)
+            }
+            source.append(colorArray)
+        }
+        
+        // the source format is Array<Array<AnyObject>>
+        let viewController = DCollectionTableViewController(source: source)
+        viewController.title = "Deloitte Market Place"
+        window?.rootViewController = UINavigationController(rootViewController: viewController)
+        window?.makeKeyAndVisible()
         return true
     }
 
